@@ -25,7 +25,7 @@ SECRET_KEY = 'your-secret-key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']  # Replace with your actual domain or IP address 
+ALLOWED_HOSTS = ['127.0.0.1','*', '127.0.0.1:5173']  # Replace with your actual domain or IP address 
 # if needed
 
 
@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'contacts',  # Add your contacts app here
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Add this line
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,10 +135,12 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Access token expires in 15 minutes
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),  # Access token expires in 15 minutes
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),    # Refresh token expires in 7 days
     'ROTATE_REFRESH_TOKENS': False,                # Set to True to issue a new refresh token on refresh
     'BLACKLIST_AFTER_ROTATION': True,              # Blacklist old refresh tokens after rotation
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+CORS_ALLOW_ALL_ORIGINS = True

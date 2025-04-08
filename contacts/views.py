@@ -8,7 +8,7 @@ from .serializers import ContactSerializer, UserRegistrationSerializer
 
 class ContactViewSet(viewsets.ModelViewSet):
     serializer_class = ContactSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         # Return only contacts belonging to the authenticated user
